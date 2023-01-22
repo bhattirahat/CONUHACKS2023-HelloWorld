@@ -42,8 +42,14 @@ class _CameraState extends State<Camera> {
               SizedBox(
                 height: 30,
               ),
-              Image.network(
-                  'https://static.wikia.nocookie.net/dragonball/images/e/e7/Goku_DBZ_Ep_31_008.png/revision/latest/scale-to-width-down/1000?cb=20170828193815'),
+              image != null
+                  ? Image.file(
+                      image!,
+                      width: 250,
+                      height: 250,
+                      fit: BoxFit.cover,
+                    )
+                  : Text("try another picture"),
               SizedBox(
                 height: 30,
               ),

@@ -61,7 +61,15 @@ class _CameraState extends State<Camera> {
       print(prob);
       print(tag);
       showAlertDialog(context, tag);
-      postRequest(1);
+      if (tag == "recycle") {
+        postRequestRecycle(int);
+      }
+      if (tag == "garbage") {
+        postRequestGarbage(int);
+      }
+      if (tag == "compost") {
+        postRequestCompost(int);
+      }
     }).catchError((error) => print(error));
   }
 
@@ -141,7 +149,7 @@ class _CameraState extends State<Camera> {
   }
 }
 
-Future<http.Response> postRequest(int) async {
+Future<http.Response> postRequestRecycle(int) async {
   var uri = "http://localhost:8080/api/stream/eco/";
   // 10.0.0.158 has to replace localhost for it to work with pixel4
   // equal to local wifi of the development computer
@@ -150,6 +158,48 @@ Future<http.Response> postRequest(int) async {
     'recycle': int.toString(),
     'garbage': 0.toString(),
     "compost": 0.toString()
+  };
+
+  var body = json.encode(data);
+  var response = await http.post(Uri.parse(uri),
+      headers: {"Content-Type": "application/json"}, body: body);
+
+  print("${response.statusCode}");
+  print("${response.body}");
+
+  return response;
+}
+
+Future<http.Response> postRequestGarbage(int) async {
+  var uri = "http://localhost:8080/api/stream/eco/";
+  // 10.0.0.158 has to replace localhost for it to work with pixel4
+  // equal to local wifi of the development computer
+
+  Map data = {
+    'recycle': 0.toString(),
+    'garbage': int.toString(),
+    "compost": 0.toString()
+  };
+
+  var body = json.encode(data);
+  var response = await http.post(Uri.parse(uri),
+      headers: {"Content-Type": "application/json"}, body: body);
+
+  print("${response.statusCode}");
+  print("${response.body}");
+
+  return response;
+}
+
+Future<http.Response> postRequestCompost(int) async {
+  var uri = "http://localhost:8080/api/stream/eco/";
+  // 10.0.0.158 has to replace localhost for it to work with pixel4
+  // equal to local wifi of the development computer
+
+  Map data = {
+    'recycle': 0.toString(),
+    'garbage': 0.toString(),
+    "compost": int.toString(),
   };
 
   var body = json.encode(data);

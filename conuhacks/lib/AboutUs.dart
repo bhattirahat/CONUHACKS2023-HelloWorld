@@ -36,9 +36,8 @@ class AboutUs extends StatelessWidget {
               Container(
                 child: Text(
                     "EcoFriendly is an innovative tool that can be used by all ages. It allows users to determine whether their trash should be sent to the compost, a recycling plant or a landfill. Powered by AI and ML using Microsoft Azure, we can offer reliable results to help preserve our planet for future generations"),
-                
                 width: 350,
-                height: 100,
+                height: 200,
               ),
             ],
           )

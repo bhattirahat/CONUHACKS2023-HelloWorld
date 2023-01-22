@@ -1,4 +1,5 @@
 import 'package:conuhacks/Aboutus.dart';
+import 'package:conuhacks/Learning.dart';
 import 'package:conuhacks/pictureCollection.dart';
 import 'package:flutter/material.dart';
 import 'package:flashy_tab_bar2/flashy_tab_bar2.dart';
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> {
   List<Widget> tabItems = [
     const HomePage(),
     const AboutUs(),
+    const Learning()
   ];
 
   @override
@@ -31,7 +33,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
-              title: Text("Homepage"),
+              title: Text("App Name"),
             ),
             body: Center(
               child: tabItems[_selectedIndex],
@@ -45,12 +47,16 @@ class _MyAppState extends State<MyApp> {
               }),
               items: [
                 FlashyTabBarItem(
-                  icon: const Icon(Icons.account_box),
+                  icon: const Icon(Icons.home),
                   title: const Text('Home'),
                 ),
                 FlashyTabBarItem(
-                  icon: const Icon(Icons.phone),
+                  icon: const Icon(Icons.contact_page),
                   title: const Text('About us'),
+                ),
+                FlashyTabBarItem(
+                  icon: const Icon(Icons.school),
+                  title: const Text('Learning'),
                 ),
               ],
             )));
@@ -80,4 +86,6 @@ class HomePage extends StatelessWidget {
     ]);
   }
 }
+
+
 

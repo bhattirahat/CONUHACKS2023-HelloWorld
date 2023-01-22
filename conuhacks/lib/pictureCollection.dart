@@ -60,7 +60,34 @@ class _CameraState extends State<Camera> {
       print(jsonResponse);
       print(prob);
       print(tag);
+      showAlertDialog(context, tag);
     }).catchError((error) => print(error));
+  }
+
+  showAlertDialog(BuildContext context, message) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Text("This belongs in the " + message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override

@@ -142,11 +142,9 @@ class _CameraState extends State<Camera> {
 }
 
 Future<http.Response> postRequest(int) async {
-  var uri = "http://localhost:8080/api/stream/";
+  var uri = "http://localhost:8080/api/stream/eco/";
   // 10.0.0.158 has to replace localhost for it to work with pixel4
   // equal to local wifi of the development computer
-  var path = 'assets/files/example_2.json';
-  String text = await rootBundle.loadString(path);
 
   Map data = {
     'recycle': int.toString(),

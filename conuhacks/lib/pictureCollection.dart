@@ -50,7 +50,7 @@ class _CameraState extends State<Camera> {
 
     dio
         .post(
-            "https://conuhackstestvision-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/f4ba3506-b2a3-4398-a13f-b187e13a0fc7/classify/iterations/Iteration7/image",
+            "https://conuhackstestvision-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/f4ba3506-b2a3-4398-a13f-b187e13a0fc7/classify/iterations/Iteration8/image",
             data: data)
         .then((response) {
       var jsonResponse = jsonDecode(response.toString());

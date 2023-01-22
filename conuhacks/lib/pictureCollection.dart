@@ -1,6 +1,8 @@
 // ignore: file_names
 // ignore: file_names
+import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -24,10 +26,41 @@ class _CameraState extends State<Camera> {
       final imageTemp = File(image.path);
       setState(() {
         this.image = imageTemp;
+        _upload(imageTemp);
       });
     } on PlatformException catch (e) {
       print("Failed to pick image $e");
     }
+  }
+
+  void _upload(File file) async {
+    String fileName = file.path.split('/').last;
+    print(fileName);
+
+    FormData data = FormData.fromMap({
+      "file": await MultipartFile.fromFile(
+        file.path,
+        filename: fileName,
+      ),
+    });
+
+    Dio dio = new Dio();
+    dio.options.headers['Prediction-Key'] = 'c0cae620c5a04827b77770c4d7b17e79';
+    dio.options.headers['Content-Type'] = 'application/octet-stream';
+
+    dio
+        .post(
+            "https://conuhackstestvision-prediction.cognitiveservices.azure.com/customvision/v3.0/Prediction/f4ba3506-b2a3-4398-a13f-b187e13a0fc7/classify/iterations/Iteration3/image",
+            data: data)
+        .then((response) {
+      var jsonResponse = jsonDecode(response.toString());
+      var prob = jsonResponse['predictions'][0]['probability'];
+      var tag = jsonResponse['predictions'][0]['tagName'];
+
+      print(jsonResponse);
+      print(prob);
+      print(tag);
+    }).catchError((error) => print(error));
   }
 
   @override
@@ -57,7 +90,7 @@ class _CameraState extends State<Camera> {
                 child: Container(
                   width: 200,
                   child: ElevatedButton(
-                      onPressed: null,
+                      onPressed: getImage,
                       child: Row(
                         children: [
                           ElevatedButton(

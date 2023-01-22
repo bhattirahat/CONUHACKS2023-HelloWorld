@@ -104,6 +104,7 @@ class _CameraState extends State<Camera> {
     return Scaffold(
         appBar: AppBar(
           title: const Text("Camera"),
+          backgroundColor: Colors.green,
         ),
         body: Center(
           child: Column(
@@ -118,7 +119,7 @@ class _CameraState extends State<Camera> {
                       height: 250,
                       fit: BoxFit.cover,
                     )
-                  : Text("try another picture"),
+                  : Text("Please Take A Picture"),
               SizedBox(
                 height: 30,
               ),
@@ -126,10 +127,12 @@ class _CameraState extends State<Camera> {
                 child: Container(
                   width: 200,
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                       onPressed: getImage,
                       child: Row(
                         children: [
                           ElevatedButton(
+                            style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
                             onPressed: getImage,
                             child: Row(
                               children: [

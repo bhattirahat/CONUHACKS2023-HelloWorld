@@ -7,24 +7,43 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ProfileCard(
-          name: "Rahat",
-          github: "rahatbhatti",
-          linkedin: "rahat bhatti",
-        ),
-        ProfileCard(
-          name: "Siddhesh",
-          github: "SiddheshMishra1999",
-          linkedin: "rahat bhatti",
-        ),
-        ProfileCard(
-          name: "Rahat",
-          github: "bhatti",
-          linkedin: "rahatbhatti",
-        ),
-      ],
+    return Container(
+      margin: EdgeInsets.fromLTRB(60, 0, 50, 0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(height: 30),
+          ProfileCard(
+            name: "Rahat",
+            github: "rahatbhatti",
+            linkedin: "rahat bhatti",
+          ),
+          ProfileCard(
+            name: "Siddhesh",
+            github: "SiddheshMishra1999",
+            linkedin: "SiddeshMishra1999",
+          ),
+          ProfileCard(
+            name: "Devin",
+            github: "devinKuriya",
+            linkedin: "Devin Kuriya",
+          ),
+          SizedBox(height: 40),
+          Column(
+            children: [
+              Text("Product Description"),
+              SizedBox(height: 20),
+              Container(
+                child: Text(
+                    "EcoFriendly is an innovative tool that can be used by all ages. It allows users to determine whether their trash should be sent to the compost, a recycling plant or a landfill. Powered by AI and ML using Microsoft Azure, we can offer reliable results to help preserve our planet for future generations"),
+                
+                width: 350,
+                height: 100,
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 }
@@ -44,7 +63,6 @@ class ProfileCard extends StatefulWidget {
 }
 
 class _ProfileCardState extends State<ProfileCard> {
-
   @override
   Widget build(BuildContext context) {
     return Card(

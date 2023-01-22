@@ -17,9 +17,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   int _selectedIndex = 0;
-  List<Widget> tabItems = [const HomePage(), const AboutUs(), const Learning()];
+  List<Widget> tabItems = [const HomePage(), const AboutUs()];
 
   @override
   void initState() {
@@ -31,12 +30,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
         home: Scaffold(
             appBar: AppBar(
-              title: Text("App Name"),
+              
+              backgroundColor: Colors.green,
+              title: Text("EcoFriendly"),
+
             ),
             body: Center(
               child: tabItems[_selectedIndex],
             ),
             bottomNavigationBar: FlashyTabBar(
+
+              backgroundColor: Colors.green,
               animationCurve: Curves.linear,
               selectedIndex: _selectedIndex,
               showElevation: true,
@@ -47,20 +51,20 @@ class _MyAppState extends State<MyApp> {
                 FlashyTabBarItem(
                   icon: const Icon(Icons.home),
                   title: const Text('Home'),
+                  activeColor: Colors.white,
+                  inactiveColor: Colors.black
                 ),
                 FlashyTabBarItem(
                   icon: const Icon(Icons.contact_page),
                   title: const Text('About us'),
+                  activeColor: Colors.white,
+                  inactiveColor: Colors.black
                 ),
-                FlashyTabBarItem(
-                  icon: const Icon(Icons.school),
-                  title: const Text('Learning'),
-                ),
+                
               ],
             )));
   }
 }
-
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -70,26 +74,27 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-   final carouselImages = [
+  final carouselImages = [
     'asset/picture/1.jpg',
     'asset/picture/2.jpg',
     'asset/picture/3.jpg',
     'asset/picture/4.jpg'
   ];
- 
+
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 20),
-      Container(child: CarouselSlider.builder(
-        options: CarouselOptions(height:200),
-        itemCount: carouselImages.length,
-        itemBuilder: (context, index, realIndex) {
-          final carouselImage = carouselImages[index];
-          return buildImage(carouselImage, index);
-        } ),
+    return Column(children: [
+      SizedBox(height: 20),
+      Container(
+        child: CarouselSlider.builder(
+            options: CarouselOptions(height: 150),
+            itemCount: carouselImages.length,
+            itemBuilder: (context, index, realIndex) {
+              final carouselImage = carouselImages[index];
+              return buildImage(carouselImage, index);
+            }),
       ),
+      Text("Click me"),
       Center(
         child: GestureDetector(
           child: Image.asset(
@@ -105,9 +110,9 @@ class _HomePageState extends State<HomePage> {
         ),
       )
     ]);
-    
   }
-  Widget buildImage(String image, int index)=>Container(
+
+  Widget buildImage(String image, int index) => Container(
         margin: EdgeInsets.symmetric(horizontal: 12),
         color: Colors.green,
         child: Image.asset(
@@ -116,10 +121,3 @@ class _HomePageState extends State<HomePage> {
         ),
       );
 }
-  
-
-
-
-
-
-   

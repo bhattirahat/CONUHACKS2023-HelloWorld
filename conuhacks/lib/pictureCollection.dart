@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class Camera extends StatefulWidget {
@@ -61,6 +61,7 @@ class _CameraState extends State<Camera> {
       print(prob);
       print(tag);
       showAlertDialog(context, tag);
+      postRequest(1);
     }).catchError((error) => print(error));
   }
 
@@ -138,4 +139,27 @@ class _CameraState extends State<Camera> {
           ),
         ));
   }
+}
+
+Future<http.Response> postRequest(int) async {
+  var uri = "http://localhost:8080/api/stream/";
+  // 10.0.0.158 has to replace localhost for it to work with pixel4
+  // equal to local wifi of the development computer
+  var path = 'assets/files/example_2.json';
+  String text = await rootBundle.loadString(path);
+
+  Map data = {
+    'recycle': int.toString(),
+    'garbage': 0.toString(),
+    "compost": 0.toString()
+  };
+
+  var body = json.encode(data);
+  var response = await http.post(Uri.parse(uri),
+      headers: {"Content-Type": "application/json"}, body: body);
+
+  print("${response.statusCode}");
+  print("${response.body}");
+
+  return response;
 }
